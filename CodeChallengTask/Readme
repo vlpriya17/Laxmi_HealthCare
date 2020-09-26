@@ -1,0 +1,57 @@
+Pre-requisites:
+
+1. make sure we have jdk 8
+2. mvn verison - 3.x
+3. docker runtime
+
+Step 1:
+Build the Application
+mvn clean install
+
+this will generate the jar file in target directory 
+
+Step 3:
+build the service with below command 
+
+docker build -t service:1.0 . 
+## the above command will create the docker image given tag value and repository
+
+Step 4:
+docker run -p 9000:9000 service:1.0 
+
+this will run the application on port 9000
+
+Hit the below URL for respective actions
+
+http://localhost:9000/enrollHealthCare
+this will enroll healthcare 
+
+http://localhost:9000/modifyEnrollHealthCare
+this will modify the healthCare
+
+http://localhost:9000/removeEnrollHealthCare
+this will remove the healthCare
+
+
+## Make sure we execute postgres.sql file in the database
+## Make sure we change the values in database.properties file accordingly to point to database
+##NOTE: This project is designed toonly one environment at this moment and can be made dynamic by changing the DB params as environment variables in docker
+
+================Request================
+{
+    "id": 11,
+    "name": "NAN",
+    "activationStatus": true,
+    "dependents": [
+        {
+             "name": "A",
+            "dateOfBirth": "1989-09-05"
+        },  
+        {
+             "name": "B",
+            "dateOfBirth": "1963-01-01"
+        },         
+    ],
+    "phoneNumber": "8793776538",
+    "dateOfBirth": "1988-11-25"
+}
